@@ -119,6 +119,7 @@ This buildfile is part of projectlombok.org. It takes care of compiling and runn
 				<classpath refid="cp.stripe" />
 				<classpath location="build/lombok" />
 				<classpath location="build/tests" />
+				<classpath location="build/teststubs" />
 				<test name="lombok.TestJavac" />
 			</junit>
 		</sequential>
@@ -141,6 +142,7 @@ This buildfile is part of projectlombok.org. It takes care of compiling and runn
 			<classpath refid="cp.stripe" />
 			<classpath location="build/lombok" />
 			<classpath location="build/tests" />
+			<classpath location="build/teststubs" />
 			<test name="lombok.TestJavac" />
 		</junit>
 	</target>
@@ -151,6 +153,7 @@ This buildfile is part of projectlombok.org. It takes care of compiling and runn
 			<echo>Running TestEclipse on eclipse-@{version} on JVM${ant.java.version}.</echo>
 			<junit haltonfailure="yes" fork="true" forkmode="once">
 				<jvmarg value="-Xbootclasspath/a:${jdk8-rt.loc}" />
+				<jvmarg value="-Ddelombok.bootclasspath=${jdk8-rt.loc}" />
 				<jvmarg value="-javaagent:dist/lombok.jar" />
 				<jvmarg line="${test.addopens}" />
 				<formatter type="plain" usefile="false" unless="tests.quiet" />
@@ -169,6 +172,7 @@ This buildfile is part of projectlombok.org. It takes care of compiling and runn
 	</target>
 	
 	<target name="test.eclipse-202006" depends="test.compile" description="runs the tests on your default VM, testing the 2020-03 release of eclipse">
+		<fetchdep.eclipse version="202006" />
 		<test.eclipse-X version="202006" />
 	</target>
 	
